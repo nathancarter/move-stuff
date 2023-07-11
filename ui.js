@@ -28,7 +28,6 @@ window.showLevelChoiceDialog = () => {
         <center>
             <h1>Choose a level to play or edit:</h1>
             ${levelButtons.join( '' )}
-            <p>(There are ${levels.length} levels in the game so far.)</p>
         </center>
     `, game.view.domElement )
 }
@@ -43,13 +42,21 @@ window.levelPicked = name => {
 const showLevelJSON = () => {
     const popupWindow = popup( `
         <h1>Level definition in JSON format</h1>
-        <p><a id="downloadCompact">Download level JSON in compact form</a></p>
-        <p><a id="downloadReadable">Download level JSON in readable form</a></p>
-        <textarea id="levelJSON" readonly class="focus-me"
+        <hr/>
+        <h2>Compact form</h2>
+        <textarea id="levelJSONSmall" readonly
+                  style="width: 100%; height: 2em;"
+        >${JSON.stringify( game.state() )}</textarea>
+        <p><a id="downloadCompact">Download link</a></p>
+        <hr/>
+        <h2>Readable form</h2>
+        <textarea id="levelJSONLarge" readonly
                   style="width: 100%; height: 20em;"
         >${JSON.stringify( game.state(), null, 4 )}</textarea>
+        <p><a id="downloadReadable">Download link</a></p>
     `, game.view.domElement )
-    popupWindow.querySelector( '#levelJSON' ).select()
+    popupWindow.querySelector( '#levelJSONLarge' ).select()
+    popupWindow.querySelector( '#levelJSONSmall' ).select()
     const compactURI = 'data:text/json;charset=utf-8,'
         + encodeURIComponent( JSON.stringify( game.state() ) )
     const compactAnchor = popupWindow.querySelector( '#downloadCompact' )
