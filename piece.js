@@ -295,7 +295,7 @@ export class Piece {
 
     static applyTransformations ( object3d ) {
         object3d.updateMatrix()
-        object3d.geometry.applyMatrix4( object3d.matrix )
+        object3d.geometry?.applyMatrix4( object3d.matrix )
         object3d.children.forEach( child => child.applyMatrix4( object3d.matrix ) )
         object3d.position.set( 0, 0, 0 )
         object3d.rotation.set( 0, 0, 0 )
