@@ -3,12 +3,6 @@ Features
 
  - Make level JSON uploadable as an editing mechanism
  - Add several levels to showcase the game's initial ingredients and style
-    - Poke ball to solution, with hint
-    - Two pokes required, with hints
-    - 3 pokers, only 2 useful, no hints
-    - Many pokers, only some useful, no hints
-    - Same as previous, but now there are holes, so be careful
-    - Poke down a staircase
     - Multiple tokens, one poke each, with hints
     - Multiple tokens, more than one poke each
     - 2 tokens, need to use one to block another, with hints
