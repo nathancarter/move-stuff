@@ -183,6 +183,7 @@ const playingResponses = {
     'r'          : () => game.setState( currentLevel )
 }
 document.addEventListener( 'keydown', event => {
+    if ( event.ctrlKey || event.metaKey ) return
     if ( popupIsVisible() && !['Escape','Enter','?'].includes( event.key ) )
         return
     const responses = {
