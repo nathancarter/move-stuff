@@ -2,6 +2,7 @@
 import { popup, unPopup, popupIsVisible } from './popup.js'
 import { levels } from './levels.js'
 import { Int3 } from './int3.js'
+import { Hint } from './hint.js'
 
 let game = null
 export const setGame = g => {
@@ -182,6 +183,7 @@ const editingResponses = {
     '3'          : () => game.addFromJSON( { type : 'goal' }, true ),
     '4'          : () => game.addFromJSON( { type : 'spinner' }, true ),
     '5'          : () => game.addFromJSON( { type : 'poker' }, true ),
+    '0'          : () => game.addFromJSON( { type : 'hint' }, true ),
     'Backspace'  : () => game.deletePieceAtCursor(),
     'j'          : target => target?.cycleFinite( 0, 1 ),
     'k'          : target => target?.cycleFinite( 1, 1 ),
@@ -222,7 +224,14 @@ document.addEventListener( 'click', event => {
     } else if ( game.isAnimating() ) {
         return
     // If we're not in edit mode, clicking uses objects
-    } else {
-        target?.play( 'use' )
+    } else if ( target ) {
+        target.play( 'use' )
+        // and if the user followed a hint we gave, advance the hint counter
+        const nextHint = game.firstVisibleHint()
+        const hintUsed = game.hintForPos( target.pos() )
+        if ( hintUsed > 0 && hintUsed == nextHint )
+            game.showOneHint( hintUsed + 1 )
+        else
+            game.showAllHints( false )
     }
 } )

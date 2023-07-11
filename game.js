@@ -10,12 +10,14 @@ import { Token } from './token.js'
 import { Goal } from './goal.js'
 import { Spinner } from './spinner.js'
 import { Poker } from './poker.js'
+import { Hint } from './hint.js'
 const pieceTypes = new Map()
 pieceTypes.set( 'floor', Floor )
 pieceTypes.set( 'token', Token )
 pieceTypes.set( 'goal', Goal )
 pieceTypes.set( 'spinner', Spinner )
 pieceTypes.set( 'poker', Poker )
+pieceTypes.set( 'hint', Hint )
 
 export class Game {
 
@@ -40,10 +42,13 @@ export class Game {
 
     setEditing ( on=true ) {
         if ( !this.view ) return
-        if ( this.cursor && ( this.editing = on ) )
+        if ( this.cursor && ( this.editing = on ) ) {
             this.scene.add( this.cursor.repr )
-        else
+            this.showAllHints()
+        } else {
             this.scene.remove( this.cursor.repr )
+            this.showOneHint( 1 )
+        }
     }
     isEditing () { return this.editing }
 
@@ -134,11 +139,38 @@ export class Game {
 
     isAnimating () { return this.board.some( piece => piece.isAnimating() ) }
 
+    showOneHint ( index ) { // 1-based index, for the user's benefit
+        this.board.forEach( piece => {
+            if ( piece.repr && ( piece instanceof Hint ) ) {
+                piece.rebuild() // updates text in case edit mode toggled
+                piece.repr.visible = piece.getFinite( 'index' ) == index
+            }
+        } )
+    }
+    showAllHints ( visible=true ) {
+        this.board.forEach( piece => {
+            if ( piece.repr && ( piece instanceof Hint ) ) {
+                piece.rebuild() // updates text in case edit mode toggled
+                piece.repr.visible = visible
+            }
+        } )
+    }
+    hintForPos ( pos ) {
+        const above = this.pieceAt( pos.plus( Int3.U ) )
+        return above instanceof Hint ? above : undefined
+    }
+    firstVisibleHint () {
+        return Math.min( 0, ...this.board.map( piece =>
+            piece instanceof Hint ? piece.getFinite( 'index' ) : 999 ) )
+    }
+
     state () { return this.board.map( piece => piece.state ) }
     setState ( jsonData ) {
         this.clear()
         jsonData.board.forEach( json => this.addFromJSON( json ) )
         if ( this.view && this.camera ) this.orientCamera()
+        this.showOneHint( 1 )
+        if ( this.board.length == 0 ) this.setEditing()
     }
 
     makeView () {
