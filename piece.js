@@ -175,7 +175,7 @@ export class Piece {
     shakeStart () { this.savePos() }
     shakePlay ( t ) {
         const adjustedShake = this.shakeDirection.clone()
-        adjustedShake.multiplyScalar( 0.1 * Math.sin( 60 * t ) / ( 1 - t ) )
+        adjustedShake.multiplyScalar( 0.25 * Math.sin( 60 * t ) * ( 1 - t ) )
         this.repr.position.copy( this.offsetPos( adjustedShake ) )
     }
     shakeEnd () { this.restorePos() }
@@ -269,10 +269,10 @@ export class Piece {
     tryMove ( destination, duration=1000 ) {
         switch ( this.canMove( destination ) ) {
             case Piece.NoMovement :
-                this.play( 'shake', duration, destination.minus( this.pos() ) )
+                this.play( 'shake', 350, destination.minus( this.pos() ) )
                 break
             case Piece.SomeMovement :
-                this.play( 'bounce', duration, destination.minus( this.pos() ) )
+                this.play( 'bounce', 350, destination.minus( this.pos() ) )
                 break
             case Piece.FullMovement :
                 this.play( 'moveTo', duration, destination )
