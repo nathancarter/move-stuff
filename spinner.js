@@ -28,7 +28,7 @@ export class Spinner extends Piece {
     }
 
     build () {
-        const material = new THREE.MeshStandardMaterial( { color: 0x555577 } )
+        const material = new THREE.MeshStandardMaterial( { color: 0xaaaacc } )
         this.main = new THREE.Mesh(
             new THREE.CylinderGeometry( 0.25, 0.25, 0.8, 24 ), material )
         this.main.translateY( -0.1 )

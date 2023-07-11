@@ -17,7 +17,7 @@ export class Poker extends Piece {
     }
 
     build () {
-        const material = new THREE.MeshStandardMaterial( { color: 0x8888aa } )
+        const material = new THREE.MeshStandardMaterial( { color: 0xaaaacc } )
         this.main = new THREE.Mesh(
             new THREE.CylinderGeometry( 0.15, 0.15, 0.5, 24 ), material )
         this.main.translateY( -0.25 )
