@@ -1,15 +1,10 @@
 
-Fixes
-
- - Ensure that everything that should prevent motion implements `allowsMove()`.
- - Test that tokens shake or bounce if they cannot move.
-
 Features
 
- - Upgrade spinners to not rotate at all if any poked token cannot move
  - Show fireworks if a level is finished (and not in edit mode)
  - Add more floor types for visual variety and see-through-ability
  - Shift+1/2/3/4 adds hint markers
+ - Implement `do()` generically as an artificial speed-timer for `play()`
 
 New types of items
 
@@ -18,7 +13,10 @@ New types of items
  - Wall spinner, which rotates adjacent walls in the xy/yz/zx plane
  - Conveyor belts (which can be inactive until something falls on them)
  - Thin walls that prevent motion in 2 directions and bounce in the other 2
- - Gray tokens with no goal locations, nor any need to get them to a goal
+ - Pale gray tokens with no goal locations, nor any need to get them to a goal
+ - Pale gray spinners and pokers you cannot click, but activate with a bounce
+    - Bounce a token off any side of a spinner to activate it
+    - Bounce a token off only the back side of a poker to activate it
 
 Possibilities, not sure yet if these are good
 
