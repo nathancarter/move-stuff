@@ -152,6 +152,10 @@ window.showHelpDialog = () => popup( `
                 <td>Insert a poker</td>
             </tr>
             <tr>
+                <td>0</td>
+                <td>Insert a bouncing, numbered hint</td>
+            </tr>
+            <tr>
                 <td>Backspace</td>
                 <td>Delete object under cursor</td>
             </tr>
