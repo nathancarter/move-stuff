@@ -89,6 +89,10 @@ export class Piece {
         return this.elapsed( name ) / duration
     }
     invt ( name='default' ) { return 1 - t( name ) }
+    cancelAnimation ( name='default' ) {
+        this.del( `timer-start-${name}` )
+        this.del( `timer-duration-${name}` )
+    }
 
     // subclasses may override this, or may just create the functions they need
     // to make this do what they want; see naming convention below

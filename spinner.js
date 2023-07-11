@@ -88,6 +88,7 @@ export class Spinner extends Piece {
         this.repr.rotation.y = Math.PI / 2 * t * this.dirPM1()
         // handle collisions with neighbors
         if ( t > 0.35 && !this.pokedNeighbors ) {
+            // Declare general data about how spinners affect their neighbors:
             const pokeOptions = [
                 [
                     [ Int3.B, Int3.L ],
@@ -102,6 +103,7 @@ export class Spinner extends Piece {
                     [ Int3.F, Int3.L ]
                 ]
             ]
+            // Compute which part of that data is relevant for this spinner:
             const pokeData = (
                 pokeOptions[this.get( 'directionIndex', 0 )]
             ).filter(
@@ -109,6 +111,26 @@ export class Spinner extends Piece {
             ).map(
                 data => [ this.pos().plus( data[0] ), data[1] ]
             )
+            // Figure out if any neighboring tokens prevent the spin:
+            const tokensToMove = [ ]
+            pokeData.forEach( datum => {
+                const target = this.game.pieceAt( datum[0] )
+                if ( !target ) return
+                const dest = datum[0].plus( datum[1] )
+                tokensToMove.push( {
+                    target, dest, howFar : target.canMove( dest )
+                } )
+            } )
+            const blockers =
+                tokensToMove.filter( token => token.howFar == Piece.NoMovement )
+            // If they do, set the blockers to shaking and stop this spin:
+            if ( blockers.length > 0 ) {
+                blockers.forEach( token => token.target.tryMove( token.dest ) )
+                this.cancelAnimation( 'spin' )
+                this.start( 80, 'unspin' )
+                return
+            }
+            // They don't, so let it happen:
             pokeData.forEach( datum => {
                 const cell = datum[0]
                 const target = this.game.pieceAt( cell )
@@ -127,6 +149,12 @@ export class Spinner extends Piece {
         this.cycleFinite( 'rotation', -this.dirPM1() )
         // clear this variable for next spin
         this.pokedNeighbors = false
+    }
+    unspinPlay ( t ) {
+        this.repr.rotation.y = Math.PI / 2 * 0.35 * ( 1 - t ) * this.dirPM1()
+    }
+    unspinEnd () {
+        this.repr.rotation.y = 0
     }
 
 }
