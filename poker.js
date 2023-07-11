@@ -69,7 +69,6 @@ export class Poker extends Piece {
     }
 
     play ( actionName, ..._ ) {
-        console.log( actionName, _ )
         if ( actionName == 'use' ) return this.start( 100, 'poke' )
     }
     pokeStart () {
