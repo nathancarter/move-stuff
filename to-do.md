@@ -3,6 +3,29 @@ Features
 
  - Make level JSON uploadable as an editing mechanism
  - Add several levels to showcase the game's initial ingredients and style
+    - Poke ball to solution, with hint
+    - Two pokes required, with hints
+    - 3 pokers, only 2 useful, no hints
+    - Many pokers, only some useful, no hints
+    - Same as previous, but now there are holes, so be careful
+    - Poke down a staircase
+    - Multiple tokens, one poke each, with hints
+    - Multiple tokens, more than one poke each
+    - 2 tokens, need to use one to block another, with hints
+    - Multiple tokens, need to use some to block others, no hints
+    - Same as previous but there are extra tokens and many blockings needed
+    - One spinner, one token, one hint, easy
+    - Multiple spinners, one token, no hints, easy
+    - 1 spinner, 1 poker, easy, no hints
+    - Medium-level combination of spinners and pokers, no hints, flat
+    - Same as previous, but now starting to use tokens to block one another
+    - Same as previous, but now extra tokens as well
+    - Same as previous, but multi-level, not flat
+    - >=2 spinners, 1 prevented from moving because of a wall, hints
+    - Same as previous, slightly harder, no hints
+    - >=2 spinners, bouncing as distinct from shaking, hints
+    - Same as previous, slightly harder, no hints
+    - Perhaps a few very hard ones
  - Implement `do()` generically as an artificial speed-timer for `play()`
 
 New types of items
