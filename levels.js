@@ -1,66 +1,15 @@
 
 export const levels = [
     {
-        name : 'Example',
-        board : [
-            {
-                "x": -2,
-                "y": 0,
-                "z": 0,
-                "type": "floor"
-            },
-            {
-                "x": -1,
-                "y": 0,
-                "z": 0,
-                "type": "goal",
-                "colorIndex": 1,
-                "shapeIndex": 1
-            },
-            {
-                "x": 0,
-                "y": 0,
-                "z": 0,
-                "type": "floor"
-            },
-            {
-                "x": 1,
-                "y": 0,
-                "z": 0,
-                "type": "floor"
-            },
-            {
-                "x": -2,
-                "y": 0,
-                "z": 1,
-                "type": "floor"
-            },
-            {
-                "x": -2,
-                "y": 1,
-                "z": 1,
-                "type": "spinner"
-            },
-            {
-                "x": 0,
-                "y": 1,
-                "z": 0,
-                "type": "poker"
-            },
-            {
-                "x": -2,
-                "y": 1,
-                "z": 0,
-                "type": "token",
-                "sizeIndex": 2,
-                "colorIndex": 1,
-                "shapeIndex": 1
-            }
-        ]
+        name : 'One poke',
+        board : [{"x":-4,"y":0,"z":0,"type":"floor"},{"x":-2,"y":0,"z":0,"type":"floor"},{"x":-1,"y":0,"z":0,"type":"floor"},{"x":0,"y":0,"z":0,"type":"floor"},{"x":1,"y":0,"z":0,"type":"floor"},{"x":2,"y":0,"z":0,"type":"floor"},{"x":3,"y":0,"z":0,"type":"floor"},{"x":4,"y":0,"z":0,"type":"floor"},{"x":4,"y":1,"z":-1,"type":"floor"},{"x":3,"y":1,"z":-1,"type":"floor"},{"x":2,"y":1,"z":-1,"type":"floor"},{"x":1,"y":1,"z":-1,"type":"floor"},{"x":0,"y":1,"z":-1,"type":"floor"},{"x":-1,"y":1,"z":-1,"type":"floor"},{"x":-2,"y":1,"z":-1,"type":"floor"},{"x":-3,"y":1,"z":-1,"type":"floor"},{"x":-4,"y":1,"z":-1,"type":"floor"},{"x":-4,"y":1,"z":0,"type":"floor"},{"x":4,"y":1,"z":0,"type":"floor"},{"x":-3,"y":0,"z":0,"type":"goal","colorIndex":1,"shapeIndex":1},{"x":2,"y":1,"z":0,"type":"token","sizeIndex":2,"colorIndex":1,"shapeIndex":1},{"x":3,"y":1,"z":0,"type":"poker"},{"x":3,"y":2,"z":0,"type":"hint"}]
+    },
+    {
+        name : 'Two pokes',
+        board : [{"x":-4,"y":0,"z":0,"type":"floor"},{"x":-2,"y":0,"z":0,"type":"floor","styleIndex":0,"colorIndex":2},{"x":-1,"y":0,"z":0,"type":"floor","styleIndex":0,"colorIndex":2},{"x":0,"y":0,"z":0,"type":"floor","styleIndex":0,"colorIndex":2},{"x":1,"y":0,"z":0,"type":"floor","colorIndex":2},{"x":2,"y":0,"z":0,"type":"floor","colorIndex":2},{"x":3,"y":0,"z":0,"type":"floor"},{"x":4,"y":0,"z":0,"type":"floor"},{"x":-4,"y":1,"z":-1,"type":"floor"},{"x":-4,"y":1,"z":0,"type":"floor"},{"x":4,"y":1,"z":0,"type":"floor"},{"x":2,"y":1,"z":0,"type":"token","sizeIndex":2,"colorIndex":1,"shapeIndex":1},{"x":3,"y":1,"z":0,"type":"poker"},{"x":3,"y":2,"z":0,"type":"hint"},{"x":-4,"y":1,"z":1,"type":"floor"},{"x":-4,"y":0,"z":1,"type":"floor"},{"x":-3,"y":0,"z":1,"type":"floor","styleIndex":0,"colorIndex":0},{"x":-2,"y":0,"z":1,"type":"floor","colorIndex":0,"styleIndex":0},{"x":-3,"y":0,"z":-1,"type":"floor","colorIndex":2},{"x":-2,"y":0,"z":-1,"type":"floor"},{"x":-1,"y":0,"z":-1,"type":"floor"},{"x":0,"y":0,"z":-1,"type":"floor"},{"x":-4,"y":1,"z":-2,"type":"floor"},{"x":-4,"y":1,"z":-3,"type":"floor"},{"x":-3,"y":1,"z":-3,"type":"floor"},{"x":-2,"y":0,"z":-2,"type":"floor"},{"x":-3,"y":0,"z":0,"type":"floor","styleIndex":0,"colorIndex":2},{"x":-3,"y":1,"z":1,"type":"poker","rotationIndex":3},{"x":-1,"y":0,"z":1,"type":"floor"},{"x":0,"y":0,"z":1,"type":"floor"},{"x":1,"y":0,"z":1,"type":"floor"},{"x":2,"y":0,"z":1,"type":"floor"},{"x":3,"y":0,"z":1,"type":"floor"},{"x":4,"y":0,"z":1,"type":"floor"},{"x":4,"y":1,"z":1,"type":"floor"},{"x":-2,"y":0,"z":-3,"type":"floor"},{"x":-3,"y":0,"z":-3,"type":"floor"},{"x":-4,"y":0,"z":-3,"type":"floor"},{"x":-4,"y":0,"z":-2,"type":"floor"},{"x":-4,"y":0,"z":-1,"type":"floor"},{"x":1,"y":0,"z":-1,"type":"floor"},{"x":2,"y":0,"z":-1,"type":"floor"},{"x":3,"y":0,"z":-1,"type":"floor"},{"x":4,"y":0,"z":-1,"type":"floor"},{"x":-2,"y":1,"z":-3,"type":"floor"},{"x":-1,"y":1,"z":-3,"type":"floor"},{"x":-1,"y":0,"z":-3,"type":"floor"},{"x":-1,"y":0,"z":-2,"type":"floor"},{"x":-1,"y":1,"z":-2,"type":"floor"},{"x":0,"y":1,"z":-2,"type":"floor"},{"x":0,"y":0,"z":-2,"type":"floor"},{"x":4,"y":0,"z":-2,"type":"floor"},{"x":3,"y":0,"z":-2,"type":"floor"},{"x":2,"y":0,"z":-2,"type":"floor"},{"x":1,"y":0,"z":-2,"type":"floor"},{"x":1,"y":1,"z":-2,"type":"floor"},{"x":2,"y":1,"z":-2,"type":"floor"},{"x":3,"y":1,"z":-2,"type":"floor"},{"x":4,"y":1,"z":-2,"type":"floor"},{"x":4,"y":1,"z":-1,"type":"floor"},{"x":-3,"y":2,"z":1,"type":"hint","indexIndex":1},{"x":-3,"y":0,"z":-2,"type":"goal","colorIndex":1,"shapeIndex":1}]
     },
     {
         name : 'Blank level for editing',
-        board : [
-        ]
+        board : []
     }
 ]
