@@ -24,11 +24,15 @@ export class Goal extends Piece {
             color: this.getFinite( 'color' )
         } )
         const extent = 0.49
-        this.main = new THREE.Mesh(
-            new THREE.CylinderGeometry( extent, extent, 2*extent, 24 ),
+        this.main = new THREE.Object3D()
+        this.repr.add( this.main )
+        this.goal = new THREE.Mesh(
+            new THREE.CylinderGeometry( extent, extent, extent, 24 ),
             material
         )
-        this.repr.add( this.main )
+        this.goal.position.y += extent / 2
+        Piece.applyTransformations( this.goal )
+        this.main.add( this.goal )
         let geometry = this.getFinite( 'shape' )
         const size = 0.5 * (
             geometry == 'octahedron' ? 0.75 :
@@ -46,9 +50,16 @@ export class Goal extends Piece {
             for ( let j = -offset ; j <= offset ; j += 2*offset ) {
                 const temp = decorator.clone()
                 temp.position.set( i, 0.5, j )
-                this.main.add( temp )
+                this.goal.add( temp )
             }
         }
+        const floorMaterial = new THREE.MeshStandardMaterial( { color: 0x888888 } )
+        const base = new THREE.Mesh(
+            new THREE.BoxGeometry( 2*extent, extent, 2*extent ),
+            floorMaterial
+        )
+        base.position.y -= extent/2
+        this.main.add( base )
     }
     destroy () {
         this.repr.remove( this.main )
@@ -71,18 +82,18 @@ export class Goal extends Piece {
     }
     update () {
         super.update()
-        if ( !this.repr || this.game.isEditing() || this.game.isAnimating() )
+        if ( !this.main || this.game.isEditing() || this.game.isAnimating() )
             return
         const pieceAbove = this.game.pieceAt( this.pos().plus( Int3.U ) )
         if ( pieceAbove && this.isHomeFor( pieceAbove ) ) {
-            if ( this.repr.scale.y == 1 ) this.start( 500, 'showHome' )
+            if ( this.goal.scale.y == 1 ) this.start( 500, 'showHome' )
         } else {
-            if ( this.repr.scale.y > 1 ) this.start( 500, 'unshowHome' )
+            if ( this.goal.scale.y > 1 ) this.start( 500, 'unshowHome' )
         }
     }
-    showHomePlay ( t ) { this.repr.scale.y = 1 + 0.5 * t }
-    showHomeEnd () { this.repr.scale.y = 1.5 }
-    unshowHomePlay ( t ) { this.repr.scale.y = 1.5 - 0.5 * t }
-    unshowHomeEnd ( t ) { this.repr.scale.y = 1 }
+    showHomePlay ( t ) { this.goal.scale.y = 1 + 0.5 * t }
+    showHomeEnd () { this.goal.scale.y = 1.5 }
+    unshowHomePlay ( t ) { this.goal.scale.y = 1.5 - 0.5 * t }
+    unshowHomeEnd ( t ) { this.goal.scale.y = 1 }
 
 }
