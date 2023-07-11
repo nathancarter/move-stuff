@@ -113,13 +113,8 @@ export class Floor extends Piece {
 
     valueChanged ( key, value ) {
         super.valueChanged( key, value )
-        if ( this.main ) {
-            if ( key == 'colorIndex' )
-                this.main.material.color =
-                    new THREE.Color( this.getFinite( 'color' ) )
-            if ( key == 'styleIndex' )
-                this.rebuild()
-        }
+        if ( this.main && [ 'colorIndex', 'styleIndex' ].includes( key ) )
+            this.rebuild()
     }
 
 }
