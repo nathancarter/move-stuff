@@ -1,10 +1,9 @@
 
 Features
 
- - Add more floor types for visual variety and see-through-ability
- - Shift+1/2/3/4 adds hint markers
  - Add several levels to showcase the game's initial ingredients and style
  - Implement `do()` generically as an artificial speed-timer for `play()`
+ - Make level JSON downloadable/uploadable in compressed/readable formats
 
 New types of items
 

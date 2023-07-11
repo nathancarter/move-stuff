@@ -57,5 +57,10 @@ export const levels = [
                 "shapeIndex": 1
             }
         ]
+    },
+    {
+        name : 'Blank level for editing',
+        board : [
+        ]
     }
 ]
