@@ -1,9 +1,9 @@
 
 Features
 
+ - Make level JSON uploadable as an editing mechanism
  - Add several levels to showcase the game's initial ingredients and style
  - Implement `do()` generically as an artificial speed-timer for `play()`
- - Make level JSON downloadable/uploadable in compressed/readable formats
 
 New types of items
 

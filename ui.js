@@ -43,11 +43,23 @@ window.levelPicked = name => {
 const showLevelJSON = () => {
     const popupWindow = popup( `
         <h1>Level definition in JSON format</h1>
+        <p><a id="downloadCompact">Download level JSON in compact form</a></p>
+        <p><a id="downloadReadable">Download level JSON in readable form</a></p>
         <textarea id="levelJSON" readonly class="focus-me"
                   style="width: 100%; height: 20em;"
         >${JSON.stringify( game.state(), null, 4 )}</textarea>
     `, game.view.domElement )
     popupWindow.querySelector( '#levelJSON' ).select()
+    const compactURI = 'data:text/json;charset=utf-8,'
+        + encodeURIComponent( JSON.stringify( game.state() ) )
+    const compactAnchor = popupWindow.querySelector( '#downloadCompact' )
+    compactAnchor.setAttribute( 'href', compactURI )
+    compactAnchor.setAttribute( 'download', 'level.json' )
+    const readableURI = 'data:text/json;charset=utf-8,'
+        + encodeURIComponent( JSON.stringify( game.state(), null, 4 ) )
+    const readableAnchor = popupWindow.querySelector( '#downloadReadable' )
+    readableAnchor.setAttribute( 'href', readableURI )
+    readableAnchor.setAttribute( 'download', 'level.json' )
 }
 
 window.showHelpDialog = () => popup( `
