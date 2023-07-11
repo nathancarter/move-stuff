@@ -13,15 +13,15 @@ export const makeSpark = (
     )
     spark.material.color.setRGB( Math.random(), Math.random(), Math.random() )
     const p0 = startingPos
-    const angleFromY = Math.random() * Math.PI / 2
+    const angleFromY = Math.random() * Math.PI / 2 * 0.75
     const angleInXZ = Math.random() * Math.PI * 2
-    const magnitude = Math.random() * 2
+    const magnitude = Math.random() * 5
     const v0 = new THREE.Vector3(
-        Math.cos( angleInXZ ) * Math.sin( angleFromY ) * magnitude,
+        Math.cos( angleInXZ ) * Math.sin( angleFromY ) * magnitude + p0.x,
         Math.cos( angleFromY ) * magnitude,
-        Math.sin( angleInXZ ) * Math.sin( angleFromY ) * magnitude
+        Math.sin( angleInXZ ) * Math.sin( angleFromY ) * magnitude + p0.z
     )
-    const a0 = new THREE.Vector3( 0, -1, 0 )
+    const a0 = new THREE.Vector3( 0, -5, 0 )
     const t0 = new Date
     const rot = new THREE.Vector3(
         Math.random() / 10,

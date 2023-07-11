@@ -29,14 +29,15 @@ export class Game {
         this.view = null // can be set later to a THREE.Renderer if desired
         this.scene = null // same as previous
         setInterval( () => {
+            const wasJustAnimating = this.isAnimating()
             this.board.forEach( piece => piece.update() )
             this.view.render( this.scene, this.camera )
-            if ( this.scene && this.isWon() ) {
+            if ( !wasJustAnimating && this.scene && this.isWon() ) {
                 const start = new THREE.Vector3(
                     Math.random() * 2 - 1, 2, Math.random() * 2 - 1 )
                 makeSpark( this.scene, start )
             }
-        }, 10 )
+        }, 20 )
         this.setEditing( false )
     }
 
@@ -53,6 +54,7 @@ export class Game {
     isEditing () { return this.editing }
 
     isWon () {
+        if ( this.isAnimating() ) return false
         const allTokens = this.board.filter( piece => piece instanceof Token )
         return allTokens.length > 0
             && allTokens.every( token => token.isHome() )
