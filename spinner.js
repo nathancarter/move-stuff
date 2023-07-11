@@ -1,6 +1,7 @@
 
 import * as THREE from 'three'
 import { Piece } from './piece.js'
+import { Token } from './token.js'
 import { Int3 } from './int3.js'
 
 export class Spinner extends Piece {
@@ -66,6 +67,16 @@ export class Spinner extends Piece {
         if ( this.main
           && [ 'armsIndex', 'rotationIndex', 'directionIndex' ].includes( key ) )
             this.rebuild()
+    }
+
+    allowsMove ( otherPiece, destination ) {
+        // From the side, spinners allow tokens to bounce off of them
+        if ( otherPiece.get( 'y' ) == this.get( 'y' )
+          && ( otherPiece instanceof Token )
+          && destination.equals( this.pos() ) )
+            return Piece.SomeMovement
+        // Otherwise they behave the same as all other objects
+        return super.allowsMove( otherPiece, destination )
     }
 
     play ( actionName, ..._ ) {

@@ -54,4 +54,12 @@ export class Token extends Piece {
         }
     }
 
+    allowsMove ( otherPiece, destination ) {
+        // Tokens allow other tokens to bounce off of them
+        if ( ( otherPiece instanceof Token ) && destination.equals( this.pos() ) )
+            return Piece.SomeMovement
+        // Otherwise they behave the same as all other objects
+        return super.allowsMove( otherPiece, destination )
+    }
+
 }

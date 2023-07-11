@@ -249,9 +249,13 @@ export class Piece {
     static FullMovement = 2
 
     // Does this piece allow the other piece to move to the desired location?
-    // By default, yes; subclasses may override.
+    // By default, it allows any move except to its own destination.
     // Return values should be NoMovement, SomeMovement, or FullMovement, above.
-    allowsMove ( otherPiece, destination ) { return Piece.FullMovement }
+    allowsMove ( otherPiece, destination ) {
+        return otherPiece == this               ? Piece.FullMovement :
+               destination.equals( this.pos() ) ? Piece.NoMovement :
+                                                  Piece.FullMovement
+    }
 
     // Can this piece move to the desired location?
     // Ask all other pieces in the game and return the minimum of their answers.
