@@ -159,11 +159,12 @@ export class Game {
     }
     hintForPos ( pos ) {
         const above = this.pieceAt( pos.plus( Int3.U ) )
-        return above instanceof Hint ? above : undefined
+        return above instanceof Hint ? above.getFinite( 'index' ) : 0
     }
     firstVisibleHint () {
-        return Math.min( 0, ...this.board.map( piece =>
+        const result = Math.min( 999, ...this.board.map( piece =>
             piece instanceof Hint ? piece.getFinite( 'index' ) : 999 ) )
+        return result < 999 ? result : 0
     }
 
     state () { return this.board.map( piece => piece.state ) }
