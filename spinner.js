@@ -102,15 +102,6 @@ export class Spinner extends Piece {
                     [ Int3.F, Int3.L ]
                 ]
             ]
-            // console.log( 'basic data', this.getFinite( 'arms' ),
-            //              JSON.stringify(
-            //                  Array(4).fill(0).map((_,i)=>this.hasArm(i)) 
-            //              ),
-            //              this.getFinite( 'rotation' ),
-            //              this.getFinite( 'direction' ) )
-            // console.log( 'direction index', this.get( 'directionIndex', 0 ) )
-            // console.log( 'direction poke data', JSON.stringify(
-            //     pokeOptions[this.get( 'directionIndex', 0 )], null, 4 ) )
             const pokeData = (
                 pokeOptions[this.get( 'directionIndex', 0 )]
             ).filter(
@@ -118,7 +109,6 @@ export class Spinner extends Piece {
             ).map(
                 data => [ this.pos().plus( data[0] ), data[1] ]
             )
-            // console.log( 'filtered poke data', JSON.stringify( pokeData, null, 4 ) )
             pokeData.forEach( datum => {
                 const cell = datum[0]
                 const target = this.game.pieceAt( cell )
