@@ -1,9 +1,9 @@
 
 Features
 
- - Show fireworks if a level is finished (and not in edit mode)
  - Add more floor types for visual variety and see-through-ability
  - Shift+1/2/3/4 adds hint markers
+ - Add several levels to showcase the game's initial ingredients and style
  - Implement `do()` generically as an artificial speed-timer for `play()`
 
 New types of items

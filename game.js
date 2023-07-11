@@ -3,6 +3,7 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { Int3 } from './int3.js'
 import { Cursor } from './cursor.js'
+import { makeSpark } from './spark.js'
 
 import { Floor } from './floor.js'
 import { Token } from './token.js'
@@ -28,6 +29,11 @@ export class Game {
         setInterval( () => {
             this.board.forEach( piece => piece.update() )
             this.view.render( this.scene, this.camera )
+            if ( this.scene && this.isWon() ) {
+                const start = new THREE.Vector3(
+                    Math.random() * 2 - 1, 2, Math.random() * 2 - 1 )
+                makeSpark( this.scene, start )
+            }
         }, 10 )
         this.setEditing( false )
     }
@@ -40,6 +46,12 @@ export class Game {
             this.scene.remove( this.cursor.repr )
     }
     isEditing () { return this.editing }
+
+    isWon () {
+        const allTokens = this.board.filter( piece => piece instanceof Token )
+        return allTokens.length > 0
+            && allTokens.every( token => token.isHome() )
+    }
 
     moveCursor ( delta ) {
         const newLoc = this.cursor.pos().plus( delta )
