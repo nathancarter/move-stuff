@@ -4,6 +4,7 @@ import { levels } from './levels.js'
 import { Int3 } from './int3.js'
 import { Spinner } from './spinner.js'
 import { Poker } from './poker.js'
+import { Hint } from './hint.js'
 
 let game = null
 export const setGame = g => {
@@ -263,11 +264,10 @@ document.addEventListener( 'keydown', event => {
 
 document.addEventListener( 'click', event => {
     // If they didn't click anything, quit
-    const clicked = game.objectsUnderMouse( event )
+    const clicked = game.objectsUnderMouse( event ).filter(
+        piece => !( piece instanceof Hint ) )
     if ( clicked.length == 0 ) return
-    // If it wasn't a piece on the board, quit
-    const target = game.board.find( piece => piece.repr == clicked[0] )
-    if ( !target ) return
+    const target = clicked[0]
     // If we're in edit mode, clicking moves the cursor
     if ( game.isEditing() && game.cursor ) {
         game.moveCursor( target.pos().minus( game.cursor.pos() ) )

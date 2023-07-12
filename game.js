@@ -271,7 +271,9 @@ export class Game {
               && !this.board.some( piece => piece.repr == walk ) )
                 walk = walk.parent
             return walk
-        } ).filter( item => !!item )
+        } ).map( item =>
+            this.board.find( piece => piece.repr == item )
+        ).filter( item => !!item )
     }
 
 }
