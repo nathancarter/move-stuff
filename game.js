@@ -63,11 +63,7 @@ export class Game {
     }
 
     moveCursor ( delta ) {
-        const newLoc = this.cursor.pos().plus( delta )
-        if ( Game.minPosition.x <= newLoc.x && newLoc.x <= Game.maxPosition.x
-          && Game.minPosition.y <= newLoc.y && newLoc.y <= Game.maxPosition.y
-          && Game.minPosition.z <= newLoc.z && newLoc.z <= Game.maxPosition.z )
-        {
+        if ( this.posIsInBounds( this.cursor.pos().plus( delta ) ) ) {
             this.cursor.move( delta )
             this.cursor.update()
             this.orientCamera()
@@ -131,6 +127,17 @@ export class Game {
         if ( !this.cursor || !this.isEditing() || !this.clipboard ) return
         this.deletePieceAtCursor()
         this.addFromJSON( this.clipboard, true )
+    }
+
+    posIsInBounds ( pos ) {
+        return Game.minPosition.x <= pos.x && pos.x <= Game.maxPosition.x
+            && Game.minPosition.y <= pos.y && pos.y <= Game.maxPosition.y
+            && Game.minPosition.z <= pos.z && pos.z <= Game.maxPosition.z
+    }
+    shiftBoard ( delta ) {
+        if ( this.board.some( piece =>
+            !this.posIsInBounds( piece.pos().plus( delta ) ) ) ) return
+        this.board.forEach( piece => piece.move( delta ) )
     }
 
     clear () {

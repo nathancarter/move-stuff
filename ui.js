@@ -135,6 +135,10 @@ window.showHelpDialog = () => popup( `
                 <td>Move 3d cursor (white wireframe) vertically</td>
             </tr>
             <tr>
+                <td>Shift + arrows/w/s</td>
+                <td>Move entire level in that direction, if possible</td>
+            </tr>
+            <tr>
                 <td>Click an object</td>
                 <td>Move the cursor there</td>
             </tr>
@@ -223,6 +227,14 @@ const editingResponses = {
     'c'          : () => game.copy(),
     'v'          : () => game.paste()
 }
+const shiftEditingResponses = {
+    'ArrowLeft'  : () => game.shiftBoard( Int3.L ),
+    'ArrowRight' : () => game.shiftBoard( Int3.R ),
+    'ArrowUp'    : () => game.shiftBoard( Int3.F ),
+    'ArrowDown'  : () => game.shiftBoard( Int3.B ),
+    'w'          : () => game.shiftBoard( Int3.U ),
+    's'          : () => game.shiftBoard( Int3.D )
+}
 const playingResponses = {
     'r'          : () => game.restoreState()
 }
@@ -232,7 +244,8 @@ document.addEventListener( 'keydown', event => {
         return
     const responses = {
         ...generalResponses,
-        ...( game.isEditing() ? editingResponses : playingResponses )
+        ...( game.isEditing() ? editingResponses : playingResponses ),
+        ...( event.shiftKey ? shiftEditingResponses : { } )
     }
     if ( responses.hasOwnProperty( event.key ) ) {
         responses[event.key]( game.cursor && game.pieceAt( game.cursor.pos() ) )
