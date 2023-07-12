@@ -215,7 +215,7 @@ export class Game {
         const h = window.innerHeight
         this.view.setSize( w, h )
         this.camera = new THREE.PerspectiveCamera( 75, w / h, 0.1, 1000 )
-        this.camera.position.set( 1, 5, 10 )
+        this.camera.position.set( 1, 10, 8 )
         this.camera.position.normalize()
         this.camera.position.multiplyScalar( 7 )
         this.orientCamera()
