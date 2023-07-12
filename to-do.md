@@ -3,11 +3,6 @@ Features
 
  - Make level JSON uploadable as an editing mechanism
  - Add several levels to showcase the game's initial ingredients and style
-    - Multiple tokens, one poke each, with hints
-    - Multiple tokens, more than one poke each
-    - 2 tokens, need to use one to block another, with hints
-    - Multiple tokens, need to use some to block others, no hints
-    - Same as previous but there are extra tokens and many blockings needed
     - One spinner, one token, one hint, easy
     - Multiple spinners, one token, no hints, easy
     - 1 spinner, 1 poker, easy, no hints
