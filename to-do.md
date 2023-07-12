@@ -1,12 +1,6 @@
 
 Features
 
- - Add several levels to showcase the game's initial ingredients and style
-    - >=2 spinners, 1 prevented from moving because of a wall, hints
-    - Same as previous, slightly harder, no hints
-    - >=2 spinners, bouncing as distinct from shaking, hints
-    - Same as previous, slightly harder, no hints
-    - Perhaps a few very hard ones
  - Implement `do()` generically as an artificial speed-timer for `play()`
  - Make level JSON uploadable as an editing mechanism
 
