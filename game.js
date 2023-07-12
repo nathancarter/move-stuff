@@ -56,9 +56,10 @@ export class Game {
 
     isWon () {
         if ( this.isAnimating() ) return false
-        const allTokens = this.board.filter( piece => piece instanceof Token )
-        return allTokens.length > 0
-            && allTokens.every( token => token.isHome() )
+        const allGoals = this.board.filter( piece => piece instanceof Goal )
+        return allGoals.length > 0
+            && allGoals.every( goal =>
+                this.pieceAt( goal.pos().plus( Int3.U ) )?.isHome() )
     }
 
     moveCursor ( delta ) {
