@@ -119,28 +119,7 @@ export class Piece {
     }
 
     do ( actionName, ...params ) { } // virtual -- subclasses may override
-    play ( actionName, ...params ) { // same, but with some default behaviors
-        switch ( actionName ) {
-            case 'shake' :
-                this.start( params[0], 'shake' )
-                this.shakeDirection = params[1].inView( false )
-                this.shakeDirection.normalize()
-                break
-            case 'bounce' :
-                this.start( params[0], 'bounce' )
-                this.bounceDirection = params[1].inView( false )
-                this.bounceDirection.multiplyScalar( 0.5 )
-                break
-            case 'moveTo' :
-                this.start( params[0], 'moveTo' )
-                this.moveDestination = params[1]
-                break
-            case 'fallTo' :
-                this.start( params[0], 'fallTo' )
-                this.fallDestination = params[1]
-                break
-        }
-    }
+    play ( actionName, ...params ) { } // same
     // The rule for how these behave and interact:
     //  1. Together they form the public API for each subclass of Piece.
     //  2. Each should be viewed as doing an action you can think of as the
@@ -164,83 +143,6 @@ export class Piece {
     //     should actually alter this.repr so the player can see the change take
     //     place.  Neither the start nor the end functions should make a call to
     //     this.set(), but the end functions may do so.
-
-    // utilities for handlers below
-    savePos () { this.reprPos = this.repr.position.clone() }
-    savedPos () { return this.reprPos }
-    offsetPos ( offset ) {
-        const result = this.reprPos.clone()
-        result.add( offset )
-        return result
-    }
-    restorePos () { this.repr.position.copy( this.reprPos ) }
-
-    // Handlers for the play('shake',...) behavior
-    shakeStart () { this.savePos() }
-    shakePlay ( t ) {
-        const adjustedShake = this.shakeDirection.clone()
-        adjustedShake.multiplyScalar( 0.25 * Math.sin( 60 * t ) * ( 1 - t ) )
-        this.repr.position.copy( this.offsetPos( adjustedShake ) )
-    }
-    shakeEnd () { this.restorePos() }
-
-    // Handlers for the play('bounce',...) behavior
-    bounceStart () { this.savePos() }
-    bouncePlay ( t ) {
-        const easedT = 2*t*(1-t)+t*t // slows over time
-        const twoWay = 1 - Math.abs( 2 * easedT - 1 ) // goes there and back
-        const adjustedBounce = this.bounceDirection.clone()
-        adjustedBounce.multiplyScalar( twoWay )
-        this.repr.position.copy( this.offsetPos( adjustedBounce ) )
-    }
-    bounceEnd () { this.restorePos() }
-
-    // Handlers for the play('moveTo',...) behavior
-    moveToStart () { this.savePos() }
-    moveToPlay ( t ) {
-        const easedT = 2*t*(1-t)+t*t // slows over time
-        const partialMotion = this.moveDestination.inView()
-        partialMotion.sub( this.savedPos() )
-        partialMotion.multiplyScalar( easedT )
-        partialMotion.add( this.savedPos() )
-        this.repr.position.copy( partialMotion )
-    }
-    moveToEnd () {
-        this.restorePos()
-        this.setPos( this.moveDestination )
-        this.freefall() // in case I moved to a space w/no floor below it
-    }
-
-    // Fall from where I am to a reasonable landing zone, or off the board
-    freefall () {
-        const fallTo = this.game.tracePathInDirection( this.pos(), Int3.D )
-        if ( fallTo.equals( this.pos ) ) return
-        const accel = 20
-        const duration = 1000 * Math.sqrt(
-            fallTo.minus( this.pos() ).length() / accel )
-        this.play( 'fallTo', duration, fallTo )
-    }
-
-    // Handlers for the play('fallTo',...) behavior
-    fallToStart () { this.savePos() }
-    fallToPlay ( t ) {
-        const easedT = t*t // speeds up over time
-        const partialMotion = this.fallDestination.inView()
-        partialMotion.sub( this.savedPos() )
-        partialMotion.multiplyScalar( easedT )
-        partialMotion.add( this.savedPos() )
-        this.repr.position.copy( partialMotion )
-    }
-    fallToEnd () {
-        if ( this.game.pieceBelow( this.fallDestination ) ) {
-            // we fell onto something so stop there
-            this.restorePos()
-            this.setPos( this.fallDestination )
-        } else {
-            // we fell into oblivion; delete this piece
-            this.game.deletePiece( this )
-        }
-    }
 
     // If a piece tries to move and cannot even go a short distance, we may
     // animate it as shaking in place.  The status indictor for such a state is:
