@@ -115,7 +115,7 @@ export class Spinner extends Piece {
             const tokensToMove = [ ]
             pokeData.forEach( datum => {
                 const target = this.game.pieceAt( datum[0] )
-                if ( !target ) return
+                if ( !target || !( target instanceof Token ) ) return
                 const dest = datum[0].plus( datum[1] )
                 tokensToMove.push( {
                     target, dest, howFar : target.canMove( dest )
@@ -134,7 +134,7 @@ export class Spinner extends Piece {
             pokeData.forEach( datum => {
                 const cell = datum[0]
                 const target = this.game.pieceAt( cell )
-                if ( !target ) return
+                if ( !target || !( target instanceof Token ) ) return
                 // console.log( 'actually poking a ' + target.get( 'type' ) )
                 const dir = datum[1]
                 target.tryMove( target.pos().plus( dir ), 250 )

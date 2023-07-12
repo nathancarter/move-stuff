@@ -82,7 +82,7 @@ export class Poker extends Piece {
         const targetDir = this.pokeDir()
         const targetPos = this.pos().plus( targetDir )
         const target = this.game.pieceAt( targetPos )
-        if ( !target ) return
+        if ( !target || !( target instanceof Token ) ) return
         const dest = this.game.tracePathInDirection( targetPos, targetDir, 12 )
         target.tryMove( dest, 100 * dest.minus( targetPos ).length() )
     }
