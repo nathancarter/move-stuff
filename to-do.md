@@ -2,10 +2,6 @@
 Features
 
  - Add several levels to showcase the game's initial ingredients and style
-    - Medium-level combination of spinners and pokers, no hints, flat
-    - Same as previous, but now starting to use tokens to block one another
-    - Same as previous, but now extra tokens as well
-    - Same as previous, but multi-level, not flat
     - >=2 spinners, 1 prevented from moving because of a wall, hints
     - Same as previous, slightly harder, no hints
     - >=2 spinners, bouncing as distinct from shaking, hints
