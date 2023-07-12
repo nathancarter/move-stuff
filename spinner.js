@@ -15,9 +15,19 @@ export class Spinner extends Piece {
             [ 'clockwise', 'counterclockwise' ] )
     }
 
+    // arm 0 = Far right
+    // arm 1 = Near right         3 0
+    // arm 2 = Near left          2 1
+    // arm 3 = Far left
     hasArm ( index ) {
-        const mask = 1 << ( 3 - ( index + this.getFinite( 'rotation' ) ) % 4 )
-        return !!( this.getFinite( 'arms' ) & mask )
+        const armCode = this.getFinite( 'arms' )
+        const armArray = Array(4).fill(0).map( (_,i) => 0+!!((1<<i)&armCode) )
+        let rotation = this.getFinite( 'rotation' )
+        if ( this.getFinite( 'direction' ) == 'counterclockwise' )
+            rotation = 4 - rotation
+        const rotatedArmArray = Array(4).fill(0).map(
+            (_,i) => armArray[(i+4-rotation)%4] )
+        return rotatedArmArray[index]
     }
     dir01 () { return this.get( 'directionIndex', 0 ) }
     dirPM1 () { return [-1,1][this.dir01()] }
@@ -49,7 +59,7 @@ export class Spinner extends Piece {
             Piece.applyTransformations( arm )
             arm.rotateX( Math.PI / 2 )
             Piece.applyTransformations( arm )
-            arm.rotateY( Math.PI / 2 * i + Math.PI / 4 )
+            arm.rotateY( 3 * Math.PI / 4 - Math.PI / 2 * i )
             arm.castShadow = true
             this.main.add( arm )
         }
@@ -91,16 +101,16 @@ export class Spinner extends Piece {
             // Declare general data about how spinners affect their neighbors:
             const pokeOptions = [
                 [
+                    [ Int3.R, Int3.B ],
                     [ Int3.B, Int3.L ],
                     [ Int3.L, Int3.F ],
-                    [ Int3.F, Int3.R ],
-                    [ Int3.R, Int3.B ]
+                    [ Int3.F, Int3.R ]
                 ],
                 [
+                    [ Int3.F, Int3.L ],
                     [ Int3.R, Int3.F ],
                     [ Int3.B, Int3.R ],
-                    [ Int3.L, Int3.B ],
-                    [ Int3.F, Int3.L ]
+                    [ Int3.L, Int3.B ]
                 ]
             ]
             // Compute which part of that data is relevant for this spinner:
@@ -146,7 +156,7 @@ export class Spinner extends Piece {
         // stop rotation on-screen because animation is complete
         // therefore also record the result in our internal data permanently
         this.repr.rotation.y = 0
-        this.cycleFinite( 'rotation', -this.dirPM1() )
+        this.cycleFinite( 'rotation', 1 )
         // clear this variable for next spin
         this.pokedNeighbors = false
     }
