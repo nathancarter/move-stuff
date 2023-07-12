@@ -172,7 +172,8 @@ export class Game {
     }
     firstVisibleHint () {
         const result = Math.min( 999, ...this.board.map( piece =>
-            piece instanceof Hint ? piece.getFinite( 'index' ) : 999 ) )
+            ( piece instanceof Hint ) && piece.repr?.visible ?
+            piece.getFinite( 'index' ) : 999 ) )
         return result < 999 ? result : 0
     }
 
