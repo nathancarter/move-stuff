@@ -8,6 +8,7 @@ const makeBox = ( x1, y1, z1, x2, y2, z2, material ) => {
             Math.abs( x2-x1 ), Math.abs( y2-y1 ), Math.abs( z2-z1 ) ),
         material )
     result.position.set( (x1+x2)/2, (y1+y2)/2, (z1+z2)/2 )
+    result.receiveShadow = true
     Piece.applyTransformations( result )
     return result
 }
@@ -37,6 +38,7 @@ export class Floor extends Piece {
                     new THREE.BoxGeometry( 2*extent, 2*extent, 2*extent ),
                     material
                 )
+                this.main.receiveShadow = true
                 break
             case 'table':
                 this.main = makeBox(
@@ -89,6 +91,7 @@ export class Floor extends Piece {
                     new THREE.BoxGeometry( 0.25, 2*extent, 0.25 ),
                     material
                 )
+                this.main.receiveShadow = true
                 const numLayers = 4
                 const layerSize = 1 / ( 2 * numLayers - 1 )
                 for ( let i = 0 ; i < numLayers ; i++ ) {
@@ -96,6 +99,7 @@ export class Floor extends Piece {
                         new THREE.BoxGeometry( 2*extent, layerSize, 2*extent ),
                         material
                     )
+                    layer.receiveShadow = true
                     layer.position.y += -0.5 + layerSize / 2 + 2 * i * layerSize
                     this.main.add( layer )
                 }

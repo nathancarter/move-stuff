@@ -31,7 +31,7 @@ export class Token extends Piece {
             geometry == 'octahedron' ? new THREE.OctahedronGeometry( size/2 ) : null,
             material
         ) )
-        this.repr.castShadow = true
+        this.main.castShadow = true
     }
     destroy () {
         this.repr.remove( this.main )
