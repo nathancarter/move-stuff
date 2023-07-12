@@ -20,14 +20,22 @@ export const showWelcomeDialog = () => popup( `
 `, game.view.domElement )
 
 window.showLevelChoiceDialog = () => {
-    const levelButtons = levels.map( ( level, index ) => `
-        <p><input type='button' value='${index+1}. ${level.name}'
-               onclick='levelPicked("${level.name}")'/></p>
-    ` )
+    let levelChoices = ''
+    for ( let i = 0 ; i < levels.length ; i++ ) {
+        if ( levels[i].section
+          && ( i == 0 || levels[i].section != levels[i-1].section ) ) {
+            if ( levelChoices.length > 0 )
+                levelChoices += '</p>'
+            levelChoices += `<h2>${levels[i].section}</h2>\n<p>`
+        }
+        levelChoices += `<input type='button' value='${i+1}. ${levels[i].name}'
+            onclick='levelPicked("${levels[i].name}")'/> `
+    }
+    levelChoices += '</p>'
     return popup( `
         <center>
             <h1>Choose a level to play or edit:</h1>
-            ${levelButtons.join( '' )}
+            ${levelChoices}
         </center>
     `, game.view.domElement )
 }
