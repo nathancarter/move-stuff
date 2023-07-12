@@ -1,11 +1,7 @@
 
 Features
 
- - Make level JSON uploadable as an editing mechanism
  - Add several levels to showcase the game's initial ingredients and style
-    - One spinner, one token, one hint, easy
-    - Multiple spinners, one token, no hints, easy
-    - 1 spinner, 1 poker, easy, no hints
     - Medium-level combination of spinners and pokers, no hints, flat
     - Same as previous, but now starting to use tokens to block one another
     - Same as previous, but now extra tokens as well
@@ -16,6 +12,7 @@ Features
     - Same as previous, slightly harder, no hints
     - Perhaps a few very hard ones
  - Implement `do()` generically as an artificial speed-timer for `play()`
+ - Make level JSON uploadable as an editing mechanism
 
 New types of items
 
