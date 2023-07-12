@@ -233,8 +233,8 @@ const shiftEditingResponses = {
     'ArrowRight' : () => game.shiftBoard( Int3.R ),
     'ArrowUp'    : () => game.shiftBoard( Int3.F ),
     'ArrowDown'  : () => game.shiftBoard( Int3.B ),
-    'w'          : () => game.shiftBoard( Int3.U ),
-    's'          : () => game.shiftBoard( Int3.D )
+    'W'          : () => game.shiftBoard( Int3.U ),
+    'S'          : () => game.shiftBoard( Int3.D )
 }
 const playingResponses = {
     'r'          : () => game.restoreState()
