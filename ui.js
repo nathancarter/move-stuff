@@ -18,6 +18,11 @@ export const showWelcomeDialog = () => popup( `
         <input type='button' value='Choose a level' onclick='showLevelChoiceDialog()'/>
         <input type='button' value='See help page' onclick='showHelpDialog()'/>
     </center>
+    <p>This experimental version of the game uses very crude geometric shapes
+    and does not have any sound effects.  Maybe later I will add those things,
+    but for creating and solving puzzles, they are not strictly necessary.
+    They just make the game more fun and immersive, so they are low priority
+    while I work to see if the game's puzzles are interesting in the first place.</p>
 `, game.view.domElement )
 
 window.showLevelChoiceDialog = () => {
