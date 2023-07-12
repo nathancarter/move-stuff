@@ -43,6 +43,7 @@ export class Game {
 
     setEditing ( on=true ) {
         if ( !this.view ) return
+        if ( this.editing && !on ) this.saveState()
         if ( this.cursor && ( this.editing = on ) ) {
             this.scene.add( this.cursor.repr )
             this.showAllHints()
@@ -175,6 +176,8 @@ export class Game {
         this.showOneHint( 1 )
         if ( this.board.length == 0 ) this.setEditing()
     }
+    saveState () { this.savedState = JSON.stringify( this.state() ) }
+    restoreState () { this.setState( { board : JSON.parse( this.savedState ) } ) }
 
     makeView () {
         this.view = new THREE.WebGLRenderer( { antialias : true } )

@@ -32,10 +32,9 @@ window.showLevelChoiceDialog = () => {
     `, game.view.domElement )
 }
 
-let currentLevel = null
 window.levelPicked = name => {
-    currentLevel = levels.find( level => level.name == name ) // save for reset
-    game.setState( currentLevel )
+    game.setState( levels.find( level => level.name == name ) )
+    game.saveState()
     unPopup()
 }
 
@@ -217,7 +216,7 @@ const editingResponses = {
     'v'          : () => game.paste()
 }
 const playingResponses = {
-    'r'          : () => game.setState( currentLevel )
+    'r'          : () => game.restoreState()
 }
 document.addEventListener( 'keydown', event => {
     if ( event.ctrlKey || event.metaKey ) return
