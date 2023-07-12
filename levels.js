@@ -49,6 +49,7 @@ export const levels = [
     {
         section : 'Meet the spinners',
         name : 'Just one spin',
+        board : [{"x":0,"y":0,"z":0,"type":"floor"},{"x":-1,"y":0,"z":0,"type":"floor"},{"x":-1,"y":0,"z":-1,"type":"floor"},{"x":0,"y":0,"z":-1,"type":"floor"},{"x":1,"y":0,"z":-1,"type":"floor"},{"x":1,"y":0,"z":1,"type":"floor"},{"x":0,"y":0,"z":1,"type":"floor"},{"x":-1,"y":0,"z":1,"type":"floor"},{"x":1,"y":0,"z":0,"type":"goal","colorIndex":2},{"x":0,"y":1,"z":0,"type":"token","colorIndex":2},{"x":0,"y":1,"z":-1,"type":"spinner","armsIndex":0,"directionIndex":1,"rotationIndex":1},{"x":0,"y":2,"z":-1,"type":"hint"}]
     },
     {
         name : 'Handoff',
