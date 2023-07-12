@@ -2,7 +2,8 @@
 import { popup, unPopup, popupIsVisible } from './popup.js'
 import { levels } from './levels.js'
 import { Int3 } from './int3.js'
-import { Hint } from './hint.js'
+import { Spinner } from './spinner.js'
+import { Poker } from './poker.js'
 
 let game = null
 export const setGame = g => {
@@ -267,7 +268,10 @@ document.addEventListener( 'click', event => {
     } else if ( game.isAnimating() ) {
         return
     // If we're not in edit mode, clicking uses objects
-    } else if ( target ) {
+    } else if (
+        target && ( ( target instanceof Spinner )
+                 || ( target instanceof Poker ) )
+    ) {
         target.play( 'use' )
         // and if the user followed a hint we gave, advance the hint counter
         const nextHint = game.firstVisibleHint()
